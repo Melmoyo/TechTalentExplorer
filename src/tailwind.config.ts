@@ -1,7 +1,4 @@
-import type { Config } from "tailwindcss";
-
-
-  const config: Config = {
+export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx, html}"],
 
   theme: {
@@ -21,8 +18,8 @@ import type { Config } from "tailwindcss";
         display: ["var(--headings)"],
         sans: ["var(--body)"],
         mono: ["var(--mono)"],
-      }
-    }
+      },
+    },
   },
 
   plugins: [],

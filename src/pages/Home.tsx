@@ -12,7 +12,7 @@ import { useState } from "react";
 import type { GitHubUserDetails } from "../types/github";
 
 const Home = () => {
-  const [users, setUsers] = useState<GitHubUserDetails[]>([]);
+  const [_users, setUsers] = useState<GitHubUserDetails[]>([]);
   return (
     <>
       <main>

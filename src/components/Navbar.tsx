@@ -10,10 +10,9 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { useFavorites } from "../context/FavoritesContext";
 import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import type { GitHubRepo } from "../types/github";
 
 const Navbar = () => {
-  const { favorites, removeFavorite, isFavorited } = useFavorites();
+  const { favorites, removeFavorite } = useFavorites();
   const [showFav, setShowFav] = useState(false);
   const location = useLocation();
   const dev = location.state?.dev;

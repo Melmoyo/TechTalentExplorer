@@ -21,6 +21,6 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.sw?git 
 # Editor directories and files
 .env
