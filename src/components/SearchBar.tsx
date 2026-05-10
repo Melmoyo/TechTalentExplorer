@@ -13,10 +13,11 @@ import type {
 
 interface SearchBarProps {
   onResults: (users: GitHubUserDetails[]) => void;
+  initialValue?: string;
 }
 
-const SearchBar = ({ onResults }: SearchBarProps) => {
-  const [searchValue, setSearchValue] = useState("");
+const SearchBar = ({ onResults, initialValue = "" }: SearchBarProps) => {
+  const [searchValue, setSearchValue] = useState(initialValue);
   const countries = [
     "All Countries",
     "Afghanistan",
@@ -143,7 +144,7 @@ const SearchBar = ({ onResults }: SearchBarProps) => {
   ];
   const navigate = useNavigate();
   const [selectedCountry, setSelectedCountry] = useState("All Countries");
-
+  const [isloading, setIsLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -152,7 +153,8 @@ const SearchBar = ({ onResults }: SearchBarProps) => {
     };
 
     try {
-      // 1️⃣ Search users
+      setIsLoading(true);
+      //  Search users
       const searchRes = await fetch(
         `https://api.github.com/search/users?q=${searchValue}+in:login,name,bio${
           selectedCountry !== "All Countries"
@@ -167,7 +169,7 @@ const SearchBar = ({ onResults }: SearchBarProps) => {
 
       const searchData: GitHubSearchResponse = await searchRes.json();
 
-      // 2️⃣ For each user, fetch full profile and repos
+      //  For each user, fetch full profile and repos
       const usersWithDetails = await Promise.all(
         searchData.items.map(async (user) => {
           // Fetch user details
@@ -198,13 +200,15 @@ const SearchBar = ({ onResults }: SearchBarProps) => {
         }),
       );
 
-      // 3️⃣ Send the full data to parent
+      // Send the full data to parent
       onResults?.(usersWithDetails);
 
-      // 4️⃣ Navigate to results page
+      // Navigate to results page
       navigate("/results", { state: { results: usersWithDetails } });
     } catch (err) {
       console.error("Error fetching GitHub users:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -248,10 +252,11 @@ const SearchBar = ({ onResults }: SearchBarProps) => {
           </div>
           <button
             type="submit"
+            disabled={isloading}
             className="search-btn w-full max-w-md rounded-lg h-12"
           >
             <FontAwesomeIcon icon={faMagnifyingGlass} />
-            Search
+            {isloading ? "Loading..." : "Search"}
           </button>
         </div>
       </form>

@@ -6,13 +6,27 @@ import { useLocation } from "react-router-dom";
 
 const Results = () => {
   const location = useLocation();
-  const [users, setUsers] = useState<GitHubUserDetails[]>(
-    location.state?.results || [],
-  );
+  const PER_PAGE= 12;
+  const getInitialUsers = (): GitHubUserDetails[] => {
+    if (location.state?.results?.length) {
+      sessionStorage.setItem(
+        "lastResults",
+        JSON.stringify(location.state.results),
+      );
+      sessionStorage.setItem("lastSearch", location.state.searchValue || "");
+      return location.state.results;
+    }
+    const saved = sessionStorage.getItem("lastResults");
+    return saved ? JSON.parse(saved) : [];
+  };
+
+  const [users, setUsers] = useState<GitHubUserDetails[]>(getInitialUsers);
+  const initialSearch =
+    location.state?.searchValue || sessionStorage.getItem("lastSearch") || "";
 
   return (
     <>
-      <SearchBar onResults={setUsers} />
+      <SearchBar onResults={setUsers} initialValue={initialSearch} />
 
       <div className="font-semibold flex justify-start m-8">
         <h2>{users.length} developers found</h2>
@@ -36,6 +50,10 @@ const Results = () => {
             company={user.company || ""}
           />
         ))}
+      </div>
+      <div className="flex gap-10 justify-center">
+        <button disabled={} onClick={}>Prev</button>
+        <button disbaled={} onClick={}>Next</button>
       </div>
     </>
   );

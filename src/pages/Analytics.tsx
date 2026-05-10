@@ -233,7 +233,9 @@ const Analytics = () => {
                 </div>
                 <div className="flex flex-col w-full">
                   {" "}
-                  <div className="text-2xl font-semibold">{dev.repos}</div>
+                  <div className="text-2xl font-semibold">
+                    {dev.public_repos}
+                  </div>
                   <div className="text-sm">Repositories</div>
                 </div>
               </div>
