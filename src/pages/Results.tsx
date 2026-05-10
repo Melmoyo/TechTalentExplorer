@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 const Results = () => {
   const location = useLocation();
-  const PER_PAGE = 12;
+
   const getInitialUsers = (): GitHubUserDetails[] => {
     if (location.state?.results?.length) {
       sessionStorage.setItem(
