@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 const Results = () => {
   const location = useLocation();
-  const PER_PAGE= 12;
+  const PER_PAGE = 12;
   const getInitialUsers = (): GitHubUserDetails[] => {
     if (location.state?.results?.length) {
       sessionStorage.setItem(
@@ -52,8 +52,8 @@ const Results = () => {
         ))}
       </div>
       <div className="flex gap-10 justify-center">
-        <button disabled={} onClick={}>Prev</button>
-        <button disbaled={} onClick={}>Next</button>
+        <button>Prev</button>
+        <button>Next</button>
       </div>
     </>
   );

@@ -1,8 +1,8 @@
-import type { GitHubSearchResponse, GitHubUserDetails } from "../types/github";
+import type { GitHubUserDetails } from "../types/github";
 import { getGitHub } from "../apis/githubApi";
 import { useState, useEffect } from "react";
 export const useDeveloper = () => {
-  const [data, setData] = useState<GitHubUserDetails[]>([]);
+  const [data, setData] = useState<GitHubUserDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
