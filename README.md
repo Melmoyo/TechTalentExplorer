@@ -1,73 +1,38 @@
-# React + TypeScript + Vite
+# TechTalentExplorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app that uses the GitHub REST API to search and explore developer profiles — view repositories, follower counts, and contribution activity in one place.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔍 Search any GitHub username and pull their profile instantly
+- 📁 View all public repositories with descriptions and stats
+- 👥 See follower and following counts
+- 📊 Contribution activity overview
+- 📱 Responsive design for mobile and desktop
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** — component-based UI
+- **TypeScript** — type-safe codebase
+- **GitHub REST API** — live developer profile data
+- **TailwindCSS** — utility-first styling
+- **Vite** — fast dev environment and build tool
 
-## Expanding the ESLint configuration
+## Why I Built This
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+I wanted to practice consuming a real public REST API and handling async data fetching in React. The GitHub API was a natural fit — it's well documented, requires no auth for public data, and the results are immediately meaningful.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Live Demo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+🔗 [View Live](https://techtalentexplorer.netlify.app/)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+```bash
+git clone https://github.com/Melmoyo/TechTalentExplorer.git
+cd TechTalentExplorer
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+> Note: The GitHub API has a rate limit of 60 requests/hour for unauthenticated requests. For higher limits, add a personal access token to a `.env` file as `VITE_GITHUB_TOKEN=your_token_here`
